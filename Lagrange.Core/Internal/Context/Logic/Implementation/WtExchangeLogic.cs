@@ -49,6 +49,7 @@ internal class WtExchangeLogic : LogicBase
                 
                 Collection.Invoker.PostEvent(new BotOfflineEvent(kick.Tag, kick.Message)); // TODO: Fill in the reason of offline
                 Collection.Scheduler.Dispose();
+                Environment.Exit(114514);
                 break;
         }
     }
