@@ -2,6 +2,7 @@ using System.Text.Json.Serialization;
 using Lagrange.Core.Message;
 using Lagrange.Core.Message.Entity;
 
+
 namespace Lagrange.OneBot.Message.Entity;
 
 [Serializable]
@@ -26,7 +27,7 @@ public partial class ImageSegment(string url)
 [SegmentSubscriber(typeof(ImageEntity), "image")]
 public partial class ImageSegment : SegmentBase
 {
-    // when will use?
+    // Use In construct message? 
     public override void Build(MessageBuilder builder, SegmentBase segment)
     {
         if (segment is ImageSegment imageSegment and not { File: "" } && CommonResolver.ResolveStream(imageSegment.File) is { } stream)
@@ -40,7 +41,7 @@ public partial class ImageSegment : SegmentBase
         }
     }
 
-    // used
+    // used in finally convert core message to OneBot message
     public override SegmentBase FromEntity(MessageChain chain, IMessageEntity entity)
     {
         if (entity is not ImageEntity imageEntity) throw new ArgumentException("Invalid entity type.");
