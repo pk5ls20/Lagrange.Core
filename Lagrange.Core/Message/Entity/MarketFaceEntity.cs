@@ -6,17 +6,17 @@ using Lagrange.Core.Internal.Packets.Message.Element.Implementation;
 [MessageElement(typeof(MarketFace))]
 public class MarketFaceEntity : IMessageEntity
 {
-    public string FaceName { get; } = string.Empty;
+    public string FaceName { get; set;} = string.Empty;
 
-    public string? FaceId { get; }
+    public string? FaceId { get; set;}
 
-    public string? Key { get; }
+    public string? Key { get; set;}
 
-    public int? ImageHeight { get; }
+    public int? ImageHeight { get; set;}
 
-    public int? ImageWidth { get; }
+    public int? ImageWidth { get; set;}
 
-    public int? TabId { get; }
+    public int? TabId { get; set;}
 
     public MarketFaceEntity() {}
     
