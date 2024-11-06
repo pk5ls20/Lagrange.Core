@@ -2,6 +2,7 @@ using System.Collections.Concurrent;
 using Lagrange.Core.Common;
 using Lagrange.Core.Internal.Packets;
 using Lagrange.Core.Utility.Binary;
+using Lagrange.Core.Utility.Extension;
 using Lagrange.Core.Utility.Sign;
 
 #pragma warning disable CS4014
@@ -39,6 +40,7 @@ internal class PacketContext : ContextBase
     {
         var task = new TaskCompletionSource<SsoPacket>();
         _pendingTasks.TryAdd(packet.Sequence, task);
+        Collection.Log.LogVerbose("PacketDebug", $"Send packet {packet.Command}, seq: {packet.Sequence}, data: {packet.Payload.Hex()}");
 
         switch (packet.PacketType)
         {
@@ -89,6 +91,7 @@ internal class PacketContext : ContextBase
         if (service.Length == 0) return;
 
         var sso = SsoPacker.Parse(service);
+        Collection.Log.LogVerbose("PacketDebug", $"Receive packet {sso.Command}, seq: {sso.Sequence}, data: {sso.Payload.Hex()}");
         
         if (_pendingTasks.TryRemove(sso.Sequence, out var task))
         {
